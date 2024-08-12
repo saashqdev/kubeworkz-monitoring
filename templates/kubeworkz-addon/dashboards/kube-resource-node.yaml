@@ -9,10 +9,10 @@ metadata:
 spec:
   title: kube-resource-node
   rows:
-  - name: 基础资源
+  - name: Basic Resources
     panels:
     - graph:
-        title: CPU 使用量
+        title: CPU Usage
         stack: true
         targets:
         - prometheus:
@@ -21,7 +21,7 @@ spec:
 / ignoring(cpu) group_left
   count without (cpu)( node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\", node=\"$node\"})
 )"
-            legend: "CPU核-{{`{{`}}cpu{{`}}`}}"
+            legend: "CPU Core-{{`{{`}}cpu{{`}}`}}"
         axes:
           left:
             unit: percentunit
@@ -38,7 +38,7 @@ spec:
             query: "node_load15{job=\"node-exporter\", node=\"$node\"}"
             legend: "load15"
     - graph:
-        title: 内存使用量
+        title: Memory Usage
         span: 12
         stack: true
         targets:
@@ -60,7 +60,7 @@ spec:
             query: "node_memory_MemFree_bytes{job=\"node-exporter\", node=\"$node\"}"
             legend: "RAM Free"
     - graph:
-        title: 网络-流入
+        title: Network-Inflow
         targets:
         - prometheus:
             query: "rate(node_network_receive_bytes_total{job=\"node-exporter\", node=\"$node\", device!=\"lo\"}[2m])"
@@ -69,7 +69,7 @@ spec:
           left:
             unit: Bps
     - graph:
-        title: 网络-流出
+        title: Network-Outflow
         targets:
         - prometheus:
             query: "rate(node_network_transmit_bytes_total{job=\"node-exporter\", node=\"$node\", device!=\"lo\"}[2m])"
@@ -78,31 +78,31 @@ spec:
           left:
             unit: Bps
     - graph:
-        title: 磁盘 I/O
+        title: Disk I/O
         targets:
         - prometheus:
             query: "rate(node_disk_read_bytes_total{job=\"node-exporter\", node=\"$node\", device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[2m])"
-            legend: "{{`{{`}}device{{`}}`}}-读"
+            legend: "{{`{{`}}device{{`}}`}}-read"
         - prometheus:
             query: "rate(node_disk_written_bytes_total{job=\"node-exporter\", node=\"$node\", device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[2m])"
-            legend: "{{`{{`}}device{{`}}`}}-写"
+            legend: "{{`{{`}}device{{`}}`}}-write"
         axes:
           left:
             unit: Bps
     - graph:
-        title: 磁盘 IOPS
+        title: Disk IOPS
         targets:
         - prometheus:
             query: "rate(node_disk_reads_completed_total{node=\"$node\",job=\"node-exporter\",device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[2m])"
-            legend: "{{`{{`}}device{{`}}`}}-读"
+            legend: "{{`{{`}}device{{`}}`}}-read"
         - prometheus:
             query: "rate(node_disk_writes_completed_total{node=\"$node\",job=\"node-exporter\",device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[2m])"
-            legend: "{{`{{`}}device{{`}}`}}-写"
+            legend: "{{`{{`}}device{{`}}`}}-write"
         axes:
           left:
             unit: iops
     - graph:
-        title: 磁盘使用量
+        title: Disk Usage
         stack: true
         targets:
         - prometheus:

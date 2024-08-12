@@ -15,10 +15,10 @@ metadata:
 spec:
   title: kube-workload-resource
   rows:
-  - name: CPU 使用
+  - name: CPU Usage
     panels:
       - graph:
-          title: Cpu 使用量
+          title: CPU Usage
           datasource: Prometheus
           span: 12
           stack: true
@@ -31,7 +31,7 @@ spec:
 ) by (pod)"
                 legend: "{{`{{`}}pod{{`}}`}}"
       - table:
-          title: CPU 配额
+          title: CPU Quota
           datasource: Prometheus
           targets:
             - prometheus:
@@ -96,21 +96,21 @@ spec:
               link: true
               linkUrl: "/control/pods/$__cell/monitor"
             - pattern: "Value #A"
-              alias: CPU 使用量
+              alias: CPU Usage
             - pattern: "Value #B"
               alias: CPU Requests
             - pattern: "Value #C"
-              alias: CPU 使用率(/Requests)
+              alias: CPU Usage(/Requests)
               unit: percentunit
             - pattern: "Value #D"
               alias: CPU Limits
             - pattern: "Value #E"
-              alias: CPU 使用率(/Limits)
+              alias: CPU Usage(/Limits)
               unit: percentunit
-  - name: 内存使用
+  - name: Memory Usage
     panels:
       - graph:
-          title: 内存使用量
+          title: Memory Usage
           datasource: Prometheus
           span: 12
           stack: true
@@ -123,7 +123,7 @@ spec:
 ) by (pod)"
                 legend: "{{`{{`}}pod{{`}}`}}"
       - table:
-          title: 内存配额
+          title: Memory Quota
           datasource: Prometheus
           targets:
             - prometheus:
@@ -206,30 +206,30 @@ spec:
               link: true
               linkUrl: "/control/pods/$__cell/monitor"
             - pattern: "Value #A"
-              alias: 内存使用量(WSS)
+              alias: Memory Usage (WSS)
               unit: bytes
             - pattern: "Value #B"
-              alias: 内存请求值
+              alias: Memory Request Value
               unit: bytes
             - pattern: "Value #C"
-              alias: 内存使用率(/Requests)
+              alias: Memory Usage (/Requests)
               unit: percentunit
             - pattern: "Value #D"
-              alias: 内存上限值
+              alias: Memory Limit
               unit: bytes
             - pattern: "Value #E"
-              alias: 内存使用率(/Limits)
+              alias: Memory Usage (/Limits)
               unit: percentunit
             - pattern: "Value #F"
-              alias: 内存使用量(RSS)
+              alias: Memory Usage (RSS)
               unit: bytes
             - pattern: "Value #G"
-              alias: 内存使用量(Cache)
+              alias: Memory Usage (Cache)
               unit: bytes
-  - name: 网络带宽
+  - name: Network Bandwidth
     panels:
       - graph:
-          title: 网络带宽-流入
+          title: Network Bandwidth - Inflow
           datasource: Prometheus
           stack: true
           targets:
@@ -242,7 +242,7 @@ group_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel
             left:
               unit: Bps
       - graph:
-          title: 网络带宽-流出
+          title: Network Bandwidth - Outflow
           datasource: Prometheus
           stack: true
           targets:
@@ -254,10 +254,10 @@ group_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel
           axes:
             left:
               unit: Bps
-  - name: 网络包速率
+  - name: Network Packet Rate
     panels:
       - graph:
-          title: 收包速率
+          title: Packet Receiving Rate
           datasource: Prometheus
           stack: true
           targets:
@@ -270,7 +270,7 @@ group_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel
             left:
               unit: pps
       - graph:
-          title: 发包速率
+          title: Packet Sending Rate
           datasource: Prometheus
           stack: true
           targets:
@@ -282,10 +282,10 @@ group_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel
           axes:
             left:
               unit: pps
-  - name: 网络丢包率
+  - name: Network Packet Loss Rate
     panels:
       - graph:
-          title: 丢包率-流入
+          title: Packet Loss Rate - Inflow
           datasource: Prometheus
           stack: true
           targets:
@@ -298,7 +298,7 @@ group_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel
             left:
               unit: pps
       - graph:
-          title: 丢包率-流出
+          title: Packet Loss Rate - Outflow
           datasource: Prometheus
           stack: true
           targets:

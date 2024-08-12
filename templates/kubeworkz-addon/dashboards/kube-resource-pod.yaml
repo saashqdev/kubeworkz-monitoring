@@ -15,10 +15,10 @@ metadata:
 spec:
   title: kube-pod-resource
   rows:
-  - name: CPU 使用(容器维度)
+  - name: CPU Usage (container dimension)
     panels:
     - graph:
-        title: CPU 使用量
+        title: CPU Usage
         datasource: Prometheus
         targets:
         - prometheus:
@@ -31,7 +31,7 @@ spec:
             query: "sum(kube_pod_container_resource_limits{cluster=\"{{ $cluster }}\", namespace=\"$namespace\", pod=\"$pod\", resource=\"cpu\"})"
             legend: limits
     - graph:
-        title: CPU 限流值(Throttling)
+        title: CPU Current Limiting Value (Throttling)
         datasource: Prometheus
         targets:
         - prometheus:
@@ -44,7 +44,7 @@ spec:
             max: 1
             min: 0
     - table:
-        title: CPU 配额
+        title: CPU Quota
         datasource: Prometheus
         targets:
         - prometheus:
@@ -77,21 +77,21 @@ spec:
         - pattern: "container"
           alias: Container
         - pattern: "Value #A"
-          alias: CPU 使用量
+          alias: CPU Usage
         - pattern: "Value #B"
           alias: CPU Requests
         - pattern: "Value #C"
-          alias: CPU 使用率(/Requests)
+          alias: CPU Usage(/Requests)
           unit: percentunit
         - pattern: "Value #D"
           alias: CPU Limits
         - pattern: "Value #E"
-          alias: CPU 使用率(/Limits)
+          alias: CPU Usage(/Limits)
           unit: percentunit
-  - name: 内存使用量(容器维度)
+  - name: Memory Usage (container dimension)
     panels:
     - graph:
-        title: 内存使用量
+        title: Memory Usage
         datasource: Prometheus
         span: 12
         targets:
@@ -108,7 +108,7 @@ spec:
           left:
             unit: bytes
     - table:
-        title: 内存配额
+        title: Memory Quota
         datasource: Prometheus
         targets:
         - prometheus:
@@ -150,30 +150,30 @@ spec:
         - pattern: "container"
           alias: Container
         - pattern: "Value #A"
-          alias: 内存使用量(WSS)
+          alias: Memory Usage (WSS)
           unit: bytes
         - pattern: "Value #B"
-          alias: 内存 Requests
+          alias: Memory Requests
           unit: bytes
         - pattern: "Value #C"
-          alias: 内存使用率(/Requests)
+          alias: Memory Usage (/Requests)
           unit: percentunit
         - pattern: "Value #D"
-          alias: 内存 Limits
+          alias: Memory Limits
           unit: bytes
         - pattern: "Value #E"
-          alias: 内存使用率(/Limits)
+          alias: Memory Usage (/Limits)
           unit: percentunit
         - pattern: "Value #F"
-          alias: 内存使用量(RSS)
+          alias: Memory Usage (RSS)
           unit: bytes
         - pattern: "Value #G"
-          alias: 内存使用量(Cache)
+          alias: Memory Usage (Cache)
           unit: bytes
-  - name: 网络带宽(Pod维度)
+  - name: Network Bandwidth (Pod dimension)
     panels:
     - graph:
-        title: 网络带宽-流入
+        title: Network Bandwidth - Inflow
         datasource: Prometheus
         targets:
         - prometheus:
@@ -183,7 +183,7 @@ spec:
           left:
             unit: Bps
     - graph:
-        title: 网络带宽-流出
+        title: Network Bandwidth - Outflow
         datasource: Prometheus
         targets:
         - prometheus:
@@ -192,10 +192,10 @@ spec:
         axes:
           left:
             unit: Bps
-  - name: 网络包速率(Pod维度)
+  - name: Network Packet Rate (Pod dimension)
     panels:
     - graph:
-        title: 收包速率
+        title: Packet Receiving Rate
         datasource: Prometheus
         targets:
         - prometheus:
@@ -205,7 +205,7 @@ spec:
           left:
             unit: pps
     - graph:
-        title: 发包速率
+        title: Packet Sending Rate
         datasource: Prometheus
         targets:
         - prometheus:
@@ -214,10 +214,10 @@ spec:
         axes:
           left:
             unit: pps
-  - name: 网络丢包率(Pod维度)
+  - name: Network Packet Loss Rate (Pod dimension)
     panels:
     - graph:
-        title: 丢包率-流入
+        title: Packet Loss Rate - Inflow
         datasource: Prometheus
         targets:
         - prometheus:
@@ -227,7 +227,7 @@ spec:
           left:
             unit: pps
     - graph:
-        title: 丢包率-流出
+        title: Packet Loss Rate-Outflow
         datasource: Prometheus
         targets:
         - prometheus:
@@ -236,17 +236,17 @@ spec:
         axes:
           left:
             unit: pps
-  - name: 磁盘读IO(容器维度)
+  - name: Disk Rread I/O (container dimension)
     panels:
     - graph:
-        title: IOPS(读+写)
+        title: IOPS (read + write)
         datasource: Prometheus
         targets:
         - prometheus:
             query: "ceil(sum by(container) (rate(container_fs_reads_total{container!=\"\", cluster=\"{{ $cluster }}\",namespace=~\"$namespace\", pod=\"$pod\"}[5m]) + rate(container_fs_writes_total{container!=\"\", cluster=\"{{ $cluster }}\",namespace=~\"$namespace\", pod=\"$pod\"}[5m])))"
             legend: "{{`{{`}}container{{`}}`}}"
     - graph:
-        title: 吞吐量(读+写)
+        title: Throughput (read+write)
         datasource: Prometheus
         targets:
         - prometheus:
@@ -255,10 +255,10 @@ spec:
         axes:
           left:
             unit: Bps
-  - name: 磁盘IO分布
+  - name: Disk I/O Distribution
     panels:
     - table:
-        title: 当前磁盘IO值
+        title: Current Disk I/O Value
         datasource: Prometheus
         targets:
         - prometheus:
@@ -295,18 +295,18 @@ spec:
         - pattern: "container"
           alias: Container
         - pattern: "Value #A"
-          alias: IOPS(读)
+          alias: IOPS (read)
         - pattern: "Value #B"
-          alias: IOPS(写)
+          alias: IOPS (write)
         - pattern: "Value #C"
-          alias: IOPS(读+写)
+          alias: IOPS (read + write)
         - pattern: "Value #D"
-          alias: 读吞吐量
+          alias: Read Throughput
           unit: Bps
         - pattern: "Value #E"
-          alias: 写吞吐量
+          alias: Write Throughput
           unit: Bps
         - pattern: "Value #F"
-          alias: 吞吐量(读+写)
+          alias: Throughput (read+write)
           unit: Bps
 

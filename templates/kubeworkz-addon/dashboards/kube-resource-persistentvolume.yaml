@@ -15,10 +15,10 @@ metadata:
 spec:
   title: kube-resource-persistent-volumes
   rows:
-  - name: PV使用信息
+  - name: PV Usage Information
     panels:
     - graph:
-        title: Volume使用量
+        title: Volume Usage
         datasource: Prometheus
         targets:
         - prometheus:
@@ -32,7 +32,7 @@ spec:
           left:
             unit: bytes
     - graph:
-        title: Volume水位
+        title: Volume Water Level
         datasource: Prometheus
         targets:
         - prometheus:

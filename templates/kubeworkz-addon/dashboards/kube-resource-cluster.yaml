@@ -347,7 +347,7 @@ spec:
           left:
             unit: bytes
     - table:
-        title: Memory quota
+        title: Memory Quota
         span: 12
         datasource: Prometheus
         targets:
